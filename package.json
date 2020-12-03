@@ -1,0 +1,16 @@
+{
+  "name": "aoc_2020_11",
+  "version": "1.0.0",
+  "description": "Day one, first challange, AOC2020",
+  "main": "index.js",
+  "scripts": {
+    "part1": "node index.js -part1",
+    "part2": "node index.js -part2"
+  },
+  "author": "seanwilson152@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "add-dependencies": "^1.1.0",
+    "fs": "0.0.1-security"
+  }
+}
