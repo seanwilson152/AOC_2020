@@ -17,8 +17,7 @@ part1 = inputData => {
 }
 
 part2 = inputData => {
-	var allSeats = inputData.map(getSeatNumber).sort((a, b) => {return a-b})
-
+	const allSeats = inputData.map(getSeatNumber).sort((a, b) => {return a-b})
 	return allSeats.reduce( (acc, seat, index) => {
 		return seat - 1 == allSeats[index-1] ? acc : seat -1
 	})

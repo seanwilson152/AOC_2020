@@ -1,5 +1,5 @@
 /*
-AoC Day${puzzelDay} Solutions
+AoC Day${puzzleDay} Solutions
 author: seanwilson152@gmail.com
 Note: These solutions should be executed via the AoC20.js launcher
 */
