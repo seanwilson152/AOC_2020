@@ -1,0 +1,15 @@
+/*
+AoC Day${puzzelDay} Solutions
+author: seanwilson152@gmail.com
+Note: These solutions should be executed via the AoC20.js launcher
+*/
+
+part1 = inputData => {
+	return null
+}
+
+part2 = inputData => {
+	return null
+}
+
+module.exports = {part1, part2}
