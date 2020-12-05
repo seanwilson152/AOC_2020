@@ -7,13 +7,13 @@ const about = `
    SeanWilson152@gmail.com
 ***********************************`
 
-loadPuzzelInput = (dayNum, isDebug) => {
+loadpuzzleInput = (dayNum, isDebug) => {
 	const inputFile =  `./day${dayNum}/${isDebug ? 'debug.txt' : 'input.txt'}`
 	if(fs.existsSync(inputFile)){
 		const data = fs.readFileSync(inputFile, 'UTF-8')
 		return data.split(/\r?\n/)
 	} else {
-		console.log("[ERROR] cant find the input data for that puzzel.")
+		console.log("[ERROR] cant find the input data for that puzzle.")
 		return null
 	}
 }
@@ -28,29 +28,29 @@ main = () => {
 		console.log("[ERROR] The --day must be specified (e.g. 'node AoC20 --day 1')")
 		return 1
 	}
-	const puzzelDay = cmdArgs[dayArgId]
+	const puzzleDay = cmdArgs[dayArgId]
 
-	//load input data for that days puzzel
+	//load input data for that days puzzle
 	const debugArg = cmdArgs.indexOf("--debug") != -1
-	console.log(`[INFO] Launching DAY${puzzelDay} puzzel!`)
-	if(debugArg) console.log(`[INFO] Using debug input data for puzzel`)
-	const inputData = loadPuzzelInput(puzzelDay, debugArg)
+	console.log(`[INFO] Launching DAY${puzzleDay} puzzle!`)
+	if(debugArg) console.log(`[INFO] Using debug input data for puzzle`)
+	const inputData = loadpuzzleInput(puzzleDay, debugArg)
 	if(inputData === null){
 		return 1
 	}
 
-	//dynamically load the puzzel code for the day specified
-	const puzzel = require(`./DAY${puzzelDay}/index`)
+	//dynamically load the puzzle code for the day specified
+	const puzzle = require(`./DAY${puzzleDay}/index`)
 
-	//execute puzzel and print results
+	//execute puzzle and print results
 	var hrstart = process.hrtime()
 
 	console.log(`\r\n[INFO] Executing part 1`)
-	const part1Result = puzzel.part1(inputData)
+	const part1Result = puzzle.part1(inputData)
 	console.log(`Part1 Result:\r\n ${part1Result}\r\n`)
 
 	console.log(`[INFO] Executing part 2`)
-	const part2Result = puzzel.part2(inputData)
+	const part2Result = puzzle.part2(inputData)
 	console.log(`Part2 Result:\r\n ${part2Result}\r\n`)
 
 	hrend = process.hrtime(hrstart)
