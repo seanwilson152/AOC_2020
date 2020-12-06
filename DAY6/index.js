@@ -9,18 +9,17 @@ const parseCustomsForms  = require("../common").separateInputByBlankRows
 part1 = inputData => {
 	return parseCustomsForms(inputData).reduce((acc,form) =>{
 		const allCharsUsedInForm = form.split(' ').join('') //join all responses in form without spaces
-		const uniqueQuestions = [...new Set(allCharsUsedInForm.split('')) ]
+		const uniqueQuestions = [...new Set(allCharsUsedInForm) ]
 		return acc + uniqueQuestions.length
 	},0)
 }
 
 part2 = inputData => {
 	return parseCustomsForms(inputData).reduce((acc,form) => {
-		const formReponses = form.split(' ')
-		const numPeopleInForm = formReponses.length
-		const uniqueQuestions = [...new Set(formReponses.join('')) ]
+		const numPeopleInForm = form.split(' ').length
+		const uniqueQuestions = [...new Set(form)]
 		return acc + uniqueQuestions.reduce((acc,find) => {
-			if(formReponses.join('').split('').filter(item =>{ return item ===find}).length == numPeopleInForm){
+			if(form.split('').filter(item =>{ return item ===find}).length == numPeopleInForm){
 				return acc + 1
 			}
 			return acc
