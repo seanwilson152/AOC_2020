@@ -4,41 +4,10 @@ author: seanwilson152@gmail.com
 Note: These solutions should be executed via the AoC20.js launcher
 */
 
-const executeCode = code => {
-	var pc = 0
-	var accumulator = 0
-	var instructionExectuted = {}
-	
-	while(pc < code.length){
-		if(instructionExectuted[pc]){
-			break
-		}
-		const instruction = code[pc]
-		const operation = instruction.substring(0,3) 
-		const condition = parseInt(instruction.substring(4))
-		instructionExectuted[pc] = true
-		pc +=1
-		switch(operation){
-			case "nop":
-				break
-			case "acc":
-				accumulator += condition
-				break
-			case "jmp":
-				pc += condition - 1
-				break
-			default:
-				throw "Unhandled instruction : " + instruction
-		}
-		if(pc < 0){
-			throw "Program counter out of bounds"
-		}
-	}
-	return {pc, accumulator}
-}
+const executeGameConsole = require('../common').gameConsole
 
 part1 = inputData => {
-	return executeCode(inputData).accumulator
+	return executeGameConsole(inputData).accumulator
 }
 
 part2 = inputData => {
@@ -55,7 +24,7 @@ part2 = inputData => {
 	while(jmpInstructions.length > 0){
 		var code = [...inputData]
 		code[jmpInstructions.pop()] = "nop"
-		const executionRes = executeCode(code)
+		const executionRes = executeGameConsole(code)
 		if(executionRes.pc == code.length){
 			return executionRes.accumulator
 		}

@@ -43,18 +43,19 @@ main = () => {
 	const puzzle = require(`./DAY${puzzleDay}/index`)
 
 	//execute puzzle and print results
-	var hrstart = process.hrtime()
-
 	console.log(`\r\n[INFO] Executing part 1`)
+	var hrstart = process.hrtime()
 	const part1Result = puzzle.part1(inputData)
-	console.log(`Part1 Result:\r\n ${part1Result}\r\n`)
+	var hrend = process.hrtime(hrstart)
+	console.log(`Part1 Result:\r\n ${part1Result}`)
+	console.log('[INFO] Part1 execution time: %ds %dms \r\n', hrend[0], hrend[1] / 1000000)
 
 	console.log(`[INFO] Executing part 2`)
+	hrstart = process.hrtime()
 	const part2Result = puzzle.part2(inputData)
-	console.log(`Part2 Result:\r\n ${part2Result}\r\n`)
-
-	hrend = process.hrtime(hrstart)
- 	console.log('[INFO] Execution time: %ds %dms', hrend[0], hrend[1] / 1000000)
+	var hrend = process.hrtime(hrstart)
+	console.log(`Part2 Result:\r\n ${part2Result}`)
+ 	console.log('[INFO] Part2 execution time: %ds %dms\r\n', hrend[0], hrend[1] / 1000000)
 }
 
 main()
