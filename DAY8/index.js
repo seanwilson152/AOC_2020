@@ -28,10 +28,10 @@ const executeCode = code => {
 				pc += condition - 1
 				break
 			default:
-				throw "unhandled instruction : " + instruction
+				throw "Unhandled instruction : " + instruction
 		}
 		if(pc < 0){
-			throw "PC Less than Zero"
+			throw "Program counter out of bounds"
 		}
 	}
 	return {pc, accumulator}
