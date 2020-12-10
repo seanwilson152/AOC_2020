@@ -3,7 +3,6 @@ AoC Day10 Solutions
 author: seanwilson152@gmail.com
 Note: These solutions should be executed via the AoC20.js launcher
 */
-
 const findJoltageSteps = inputData => {
 	inputData = inputData.map(e => {return parseInt(e)})
 	inputData = inputData.sort((a,b)=>{return a-b})
@@ -22,21 +21,20 @@ part1 = inputData => {
 }
 
 part2 = inputData => {
-
 	const joltageSteps = findJoltageSteps(inputData)
 	var permutations = 1 // we start with the most expansive permutation
 	var index = 0
 
-	//next run though the array joltageSteps looking for consecutive 1's. every time we get two 
-	// or more consecutive 1's we multiply or permutations by the number of dif ways of removing an adapter
+	//next run though the array joltageSteps looking for consecutive 1's. Every time we get two 
+	// or more consecutive 1's we multiply our adapter permutations by the number of dif ways of removing 1jolt spaced adapters for this subset
 	while(index < joltageSteps.length){
 		var consecutiveOnes = 0
 		while(diffs[index] == 1){
 			index+=1
 			consecutiveOnes +=1
 		}
-		// i spent way too long tring to come up with a formula to calulate this number. 
-		// in the end i looked at my data set and realixed there are no more than 4 consecutive 1s. so hard coded the factors
+		// i spent way too long tring to come up with a formula to calculate number of permutations for consequtive 1 spaced adapters. 
+		// in the end i looked at my data set and realized there are no more than 4 consecutive 1s spaced adatpers in the dataset. so hard coded the factors for 2/3/4...
 		switch(consecutiveOnes){
 			case 0:
 			case 1: 
