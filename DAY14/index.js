@@ -32,10 +32,10 @@ part2 = inputData => {
 		const opperation = instruction.split(' = ')[0]	
 		const opperand = instruction.split(' = ')[1]	
 		if(opperation === "mask"){
-			//calulate AND/OR vals
-			maskOr = [BigInt(parseInt(opperand.split('X').join('0'),2))]
-			maskAnd = (68719476735n).toString(2).split('')
-			opperand.split('').reverse().forEach((val,index)=>{
+			//calculate AND/OR vals
+			maskOr = [BigInt(parseInt(opperand.split('X').join('0'),2))] // init maskOr to all X=0
+			maskAnd = (68719476735n).toString(2).split('')				 // 68719476735n is just all 1's 
+			opperand.split('').reverse().forEach((val,index)=>{			 // find floating in mask and update numeric masks
 				if(val=='X'){
 					maskAnd[35-index]= '0'
 					maskOr.forEach(mask=>{
@@ -45,12 +45,12 @@ part2 = inputData => {
 			})
 			maskAnd = BigInt(parseInt(maskAnd.join(''),2))
 		} else {
-			//mask address and apply data
+			//apply mask to address and load data in memory
 			maskOr.forEach((mask)=>{
-				address = BigInt(opperation.split('[')[1].split("]")[0])  // get the address from file
-				address &= maskAnd										  // clear masked bits
-				address |= mask										      // set masked bits
-				memory[address] = BigInt(parseInt(opperand))			  // place value in memory 
+				address = BigInt(opperation.split('[')[1].split("]")[0])   // get the address from file
+				address &= maskAnd										   // clear masked bits
+				address |= mask										       // set masked bits
+				memory[address] = BigInt(parseInt(opperand))			   // place value in memory 
 			})
 		}
 	});
