@@ -3,8 +3,11 @@ AoC Day14 Solutions
 author: seanwilson152@gmail.com
 Note: These solutions should be executed via the AoC20.js launcher
 */
-
-const countOccurrences = (arr, val) => arr.reduce((a, v) => (v == val ? a + 1 : a), 0);
+const sumMemory = memory =>{
+	return Object.keys(memory).reduce((acc,address)=>{
+		return acc+memory[address]
+	},0n)
+}
 
 part1 = inputData => {
 	memory = {}
@@ -20,9 +23,7 @@ part1 = inputData => {
 			memory[address] = (BigInt(opperand) | maskOr) & maskAnd
 		}
 	});
-	return Object.keys(memory).reduce((acc,address)=>{
-		return acc+memory[address]
-	},0n)
+	return sumMemory(memory)
 }
 part2 = inputData => {
 	memory = {}
@@ -34,8 +35,8 @@ part2 = inputData => {
 		if(opperation === "mask"){
 			//calculate AND/OR vals
 			maskOr = [BigInt(parseInt(opperand.split('X').join('0'),2))] // init maskOr to all X=0
-			maskAnd = (68719476735n).toString(2).split('')				 // 68719476735n is just all 1's 
-			opperand.split('').reverse().forEach((val,index)=>{			 // find floating in mask and update numeric masks
+			maskAnd = (68719476735n).toString(2).split('')               // 68719476735n is just all 1's 
+			opperand.split('').reverse().forEach((val,index)=>{          // find floating in mask and update numeric masks
 				if(val=='X'){
 					maskAnd[35-index]= '0'
 					maskOr.forEach(mask=>{
@@ -48,15 +49,13 @@ part2 = inputData => {
 			//apply mask to address and load data in memory
 			maskOr.forEach((mask)=>{
 				address = BigInt(opperation.split('[')[1].split("]")[0])   // get the address from file
-				address &= maskAnd										   // clear masked bits
-				address |= mask										       // set masked bits
-				memory[address] = BigInt(parseInt(opperand))			   // place value in memory 
+				address &= maskAnd                                         // clear masked bits
+				address |= mask                                            // set masked bits
+				memory[address] = BigInt(parseInt(opperand))               // place value in memory 
 			})
 		}
 	});
-	return Object.keys(memory).reduce((acc,key)=>{
-		return acc+memory[key]
-	},0n)
+	return sumMemory(memory)
 }
 
 module.exports = {part1, part2}
